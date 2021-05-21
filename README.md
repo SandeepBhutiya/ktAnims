@@ -1,4 +1,5 @@
-# ktAnims
+# ktAnims 
+[![latest](https://badge.fury.io/js/github-release-notes.svg)](https://github.com/SandeepBhutiya/ktAnims/releases)
 Android View-Animation Library written in pure Kotlin 
 
 ## Implementation
@@ -17,7 +18,7 @@ allprojects {
 
 ```
 dependencies {
-	implementation 'com.github.User:Repo:Tag'
+	 implementation 'com.github.SandeepBhutiya:ktAnims:$latest'
 }
 ```
 
