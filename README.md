@@ -18,7 +18,7 @@ allprojects {
 
 ```
 dependencies {
-	 implementation 'com.github.SandeepBhutiya:ktAnims:$latest'
+	 implementation 'com.github.SandeepBhutiya:ktAnims:0.3'
 }
 ```
 
