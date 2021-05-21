@@ -1,6 +1,6 @@
 # ktAnims 
 [![latest](https://badge.fury.io/js/github-release-notes.svg)](https://github.com/SandeepBhutiya/ktAnims/releases)
-Android View-Animation Library written in pure Kotlin 
+A Simple Android View-Animation Library written in pure Kotlin 
 
 ## Implementation
 Add it in your root build.gradle at the end of repositories:
