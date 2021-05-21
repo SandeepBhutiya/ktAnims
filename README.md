@@ -3,6 +3,7 @@ Android View-Animation Library written in pure Kotlin
 
 ## Implementation
 Add it in your root build.gradle at the end of repositories:
+
 `
 allprojects {
 		repositories {
@@ -11,6 +12,7 @@ allprojects {
 		}
 	}
 `
+
 & Add the dependency
 
 `
@@ -19,10 +21,12 @@ dependencies {
 	}
 `
 
+
 ## Usage
 `
 View.scaleIn()
 `
+
 
 ## Available Animations
 * .moveIn()
