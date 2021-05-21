@@ -51,5 +51,5 @@ You can customize Animation Direction, Duration, Delay, Initial Properties and A
 * .fadeIn()
 * .fadeOut()
 
-More are coming...
+### More animations are coming...
 
