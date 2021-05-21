@@ -3,7 +3,7 @@
 A Simple & Configurable Android View-Animations Library written in pure Kotlin 
 
 ## Implementation
-Add it in your root build.gradle at the end of repositories:
+Add it in your project's build.gradle at the end of repositories:
 
 ```
 allprojects {
@@ -14,7 +14,7 @@ allprojects {
 }
 ```
 
-& Add the dependency
+& Add the dependency in your app's build.gradle
 
 ```
 dependencies {
@@ -25,8 +25,18 @@ dependencies {
 
 ## Usage
 ```
-View.scaleIn()
+View.scaleIn() 
+
+OR
+
+View.scaleIn(
+ 	initialValue = 0f,
+        direction = Anim.Dir.TOP,
+        duration = 250L,
+        delay = 0)
 ```
+
+You can customize Animation Direction, Duration, Delay, Initial Properties and Animation specific properties
 
 
 ## Available Animations
