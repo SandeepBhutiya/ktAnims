@@ -1,6 +1,6 @@
 # ktAnims
 
-A Simple Android View-Animation Library written in pure Kotlin 
+A Simple & Configurable Android View-Animations Library written in pure Kotlin 
 
 ## Implementation
 Add it in your root build.gradle at the end of repositories:
