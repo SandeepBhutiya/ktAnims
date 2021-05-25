@@ -27,6 +27,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -34,15 +35,12 @@ android {
     afterEvaluate {
         publishing {
             publications {
-                // Creates a Maven publication called "release".
                 release(MavenPublication) {
-                    // Applies the component for the release build variant.
                     from components.release
 
-                    // You can then customize attributes of the publication as shown below.
                     groupId = 'com.sandeepbhutiya.ktanim'
                     artifactId = 'final'
-                    version = '0.2'
+                    version = '0.4'
                 }
             }
         }

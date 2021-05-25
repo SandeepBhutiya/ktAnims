@@ -2,6 +2,8 @@ package com.sandeepbhutiya.ktanims
 
 import android.view.View
 
+@Suppress("unused")
+@SuppressWarnings("unused")
 object Anim {
     private const val DURATION = 250L
     private const val DISTANCE = 150f
@@ -293,6 +295,24 @@ object Anim {
         val anim = this.animate()
         anim.scaleX(1f)
         anim.scaleY(1f)
+
+        anim.duration = duration
+        anim.startDelay = delay
+        anim.start()
+    }
+
+    fun View.windowOut(
+        vertical: Boolean = true,
+        duration: Long = 250,
+        delay: Long = 0
+    ) {
+        val anim = this.animate()
+
+        if (vertical) {
+            anim.scaleX(0f)
+        } else {
+            anim.scaleY(0f)
+        }
 
         anim.duration = duration
         anim.startDelay = delay
