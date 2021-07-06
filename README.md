@@ -18,25 +18,41 @@ allprojects {
 
 ```
 dependencies {
-	 implementation 'com.github.SandeepBhutiya:ktAnims:0.3'
+	 implementation 'com.github.SandeepBhutiya:ktAnims:<latest-version>'
 }
 ```
 
 
 ## Usage
 ```
-View.scaleIn() 
+// Simple usage
+View.scaleIn()
 
-OR
-
+// Configure
 View.scaleIn(
- 	initialValue = 0f,
+ 	    initialValue = 0f,
         direction = Anim.Dir.TOP,
         duration = 250L,
         delay = 0)
-```
 
-You can customize Animation Direction, Duration, Delay, Initial Properties and Animation specific properties
+// onFinish
+View.jumpIn {
+    // do something on animation finish
+}
+
+// Multiple Animations
+View.apply {
+    fadeIn()
+    scaleIn()
+}
+
+// Chained Animations
+View.apply {
+    jumpIn {
+        scaleOut()
+    }
+}
+```
 
 
 ## Available Animations
