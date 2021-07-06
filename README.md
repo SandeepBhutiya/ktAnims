@@ -9,7 +9,7 @@ Add it in your project's build.gradle at the end of repositories:
 allprojects {
     repositories {
         ...
-        maven { url 'https://jitpack.io' 
+        maven { url 'https://jitpack.io' }
     }
 }
 ```
@@ -18,7 +18,8 @@ allprojects {
 
 ```
 dependencies {
-	 implementation 'com.github.SandeepBhutiya:ktAnims:<latest-version>'
+    ...
+    implementation 'com.github.SandeepBhutiya:ktAnims:<latest-version>'
 }
 ```
 
