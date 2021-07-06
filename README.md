@@ -7,10 +7,10 @@ Add it in your project's build.gradle at the end of repositories:
 
 ```
 allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' 
+    }
 }
 ```
 
