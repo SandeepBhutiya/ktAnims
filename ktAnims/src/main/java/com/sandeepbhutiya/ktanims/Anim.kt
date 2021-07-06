@@ -25,7 +25,7 @@ object Anim {
         distance: Float = DISTANCE,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: View.() -> Unit
+        onFinish: (View.() -> Unit)? = null
     ) {
         this.animate().apply {
             when (direction) {
@@ -57,7 +57,7 @@ object Anim {
 
             this.duration = duration
             startDelay = delay
-            withEndAction { onFinish.invoke(this@moveIn) }
+            onFinish?.let { withEndAction { it.invoke(this@moveIn) } }
 
             start()
         }
@@ -69,7 +69,7 @@ object Anim {
         distance: Float = DISTANCE,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: View.() -> Unit
+        onFinish: (View.() -> Unit)? = null
     ) {
         this.animate().apply {
             when (direction) {
@@ -98,7 +98,7 @@ object Anim {
 
             this.duration = duration
             startDelay = delay
-            withEndAction { onFinish.invoke(this@moveOut) }
+            onFinish?.let { withEndAction { it.invoke(this@moveOut) } }
 
             start()
         }
@@ -109,7 +109,7 @@ object Anim {
         direction: Dir = Dir.DEFAULT,
         duration: Long = 250,
         delay: Long = 0,
-        onFinish: View.() -> Unit
+        onFinish: (View.() -> Unit)? = null
     ) {
         this.apply {
             scaleX = initialValue
@@ -152,8 +152,7 @@ object Anim {
 
                 this.duration = duration
                 startDelay = delay
-                withEndAction { onFinish.invoke(this@scaleIn) }
-
+                onFinish?.let { withEndAction { it.invoke(this@scaleIn) } }
                 start()
             }
         }
@@ -165,7 +164,7 @@ object Anim {
         reversed: Boolean = false,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: View.() -> Unit
+        onFinish: (View.() -> Unit)? = null
     ) {
         this.animate().apply {
             scaleX(size)
@@ -228,7 +227,7 @@ object Anim {
 
             this.duration = duration
             startDelay = delay
-            withEndAction { onFinish.invoke(this@scaleOut) }
+            onFinish?.let { withEndAction { it.invoke(this@scaleOut) } }
 
             start()
         }
@@ -239,7 +238,7 @@ object Anim {
         jumpSize: Float = 1.05f,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: View.() -> Unit
+        onFinish: (View.() -> Unit)? = null
     ) {
         this.scaleX = initialValue
         this.scaleY = initialValue
@@ -256,7 +255,7 @@ object Anim {
                     scaleY(1f)
 
                     this.duration = duration / 2
-                    withEndAction { onFinish.invoke(this@jumpIn) }
+                    onFinish?.let { withEndAction { it.invoke(this@jumpIn) } }
 
                     start()
                 }
@@ -270,7 +269,7 @@ object Anim {
         jumpSize: Float = 1.05f,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: View.() -> Unit
+        onFinish: (View.() -> Unit)? = null
     ) {
         this.animate().apply {
             scaleX(jumpSize)
@@ -284,7 +283,7 @@ object Anim {
                     scaleY(0f)
 
                     this.duration = duration / 2
-                    withEndAction { onFinish.invoke(this@jumpOut) }
+                    onFinish?.let { withEndAction { it.invoke(this@jumpOut) } }
 
                     start()
                 }
@@ -299,7 +298,7 @@ object Anim {
         vertical: Boolean = true,
         duration: Long = 250,
         delay: Long = 0,
-        onFinish: View.() -> Unit
+        onFinish: (View.() -> Unit)? = null
     ) {
         if (vertical) this.scaleY = initialValue else this.scaleX = initialValue
 
@@ -309,7 +308,7 @@ object Anim {
 
             this.duration = duration
             startDelay = delay
-            withEndAction { onFinish.invoke(this@windowIn) }
+            onFinish?.let { withEndAction { it.invoke(this@windowIn) } }
 
             start()
         }
@@ -320,14 +319,14 @@ object Anim {
         vertical: Boolean = true,
         duration: Long = 250,
         delay: Long = 0,
-        onFinish: View.() -> Unit
+        onFinish: (View.() -> Unit)? = null
     ) {
         this.animate().apply {
             if (vertical) scaleX(0f) else scaleY(0f)
 
             this.duration = duration
             startDelay = delay
-            withEndAction { onFinish.invoke(this@windowOut) }
+            onFinish?.let { withEndAction { it.invoke(this@windowOut) } }
 
             start()
         }
@@ -338,7 +337,7 @@ object Anim {
         initialValue: Float = 0f,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: View.() -> Unit
+        onFinish: (View.() -> Unit)? = null
     ) {
         this.alpha = initialValue
 
@@ -347,7 +346,7 @@ object Anim {
 
             this.duration = duration
             startDelay = delay
-            withEndAction { onFinish.invoke(this@fadeIn) }
+            onFinish?.let { withEndAction { it.invoke(this@fadeIn) } }
 
             start()
         }
@@ -357,14 +356,14 @@ object Anim {
         opacity: Float = 0f,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: View.() -> Unit
+        onFinish: (View.() -> Unit)? = null
     ) {
         this.animate().apply {
             alpha(opacity)
 
             this.duration = duration
             startDelay = delay
-            withEndAction { onFinish.invoke(this@fadeOut) }
+            onFinish?.let { withEndAction { it.invoke(this@fadeOut) } }
 
             start()
         }
