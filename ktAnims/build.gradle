@@ -41,7 +41,7 @@ android {
 
                     groupId = 'com.sandeepbhutiya.ktanim'
                     artifactId = 'final'
-                    version = '0.5'
+                    version = '0.7'
                 }
             }
         }
