@@ -30,7 +30,7 @@ View.scaleIn()
 
 // Configure
 View.scaleIn(
- 	    initialValue = 0f,
+    initialValue = 0f,
         direction = Anim.Dir.TOP,
         duration = 250L,
         delay = 0)
