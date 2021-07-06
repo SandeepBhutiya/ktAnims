@@ -24,50 +24,43 @@ object Anim {
         direction: Dir,
         distance: Float = DISTANCE,
         duration: Long = DURATION,
-        delay: Long = 0
+        delay: Long = 0,
+        onFinish: View.() -> Unit
     ) {
-        val anim = this.animate()
+        this.animate().apply {
+            when (direction) {
+                Dir.TOP -> this@moveIn.translationY = -distance
+                Dir.BOTTOM -> this@moveIn.translationY = distance
+                Dir.LEFT -> this@moveIn.translationX = distance
+                Dir.RIGHT -> this@moveIn.translationX = -distance
+                Dir.TOP_LEFT -> {
+                    this@moveIn.translationY = -distance
+                    this@moveIn.translationX = distance
+                }
+                Dir.TOP_RIGHT -> {
+                    this@moveIn.translationY = -distance
+                    this@moveIn.translationX = -distance
+                }
+                Dir.BOTTOM_LEFT -> {
+                    this@moveIn.translationY = distance
+                    this@moveIn.translationX = distance
+                }
+                Dir.BOTTOM_RIGHT -> {
+                    this@moveIn.translationY = distance
+                    this@moveIn.translationX = -distance
+                }
+                Dir.DEFAULT -> this@moveIn.translationY = -distance
+            }
 
-        when (direction) {
-            Dir.TOP -> {
-                this.translationY = -distance
-            }
-            Dir.BOTTOM -> {
-                this.translationY = distance
-            }
-            Dir.LEFT -> {
-                this.translationX = distance
-            }
-            Dir.RIGHT -> {
-                this.translationX = -distance
-            }
-            Dir.TOP_LEFT -> {
-                this.translationY = -distance
-                this.translationX = distance
-            }
-            Dir.TOP_RIGHT -> {
-                this.translationY = -distance
-                this.translationX = -distance
-            }
-            Dir.BOTTOM_LEFT -> {
-                this.translationY = distance
-                this.translationX = distance
-            }
-            Dir.BOTTOM_RIGHT -> {
-                this.translationY = distance
-                this.translationX = -distance
-            }
-            Dir.DEFAULT -> {
-                this.translationY = -distance
-            }
+            translationX(0f)
+            translationY(0f)
+
+            this.duration = duration
+            startDelay = delay
+            withEndAction { onFinish.invoke(this@moveIn) }
+
+            start()
         }
-
-        anim.translationX(0f)
-        anim.translationY(0f)
-
-        anim.duration = duration
-        anim.startDelay = delay
-        anim.start()
     }
 
 
@@ -75,92 +68,95 @@ object Anim {
         direction: Dir,
         distance: Float = DISTANCE,
         duration: Long = DURATION,
-        delay: Long = 0
+        delay: Long = 0,
+        onFinish: View.() -> Unit
     ) {
-        val anim = this.animate()
+        this.animate().apply {
+            when (direction) {
+                Dir.TOP -> translationY(-distance)
+                Dir.BOTTOM -> translationY(distance)
+                Dir.LEFT -> translationX(distance)
+                Dir.RIGHT -> translationX(-distance)
+                Dir.TOP_LEFT -> {
+                    translationY(-distance)
+                    translationX(distance)
+                }
+                Dir.TOP_RIGHT -> {
+                    translationY(-distance)
+                    translationX(-distance)
+                }
+                Dir.BOTTOM_LEFT -> {
+                    translationY(distance)
+                    translationX(distance)
+                }
+                Dir.BOTTOM_RIGHT -> {
+                    translationY(distance)
+                    translationX(-distance)
+                }
+                Dir.DEFAULT -> translationY(distance)
+            }
 
-        when (direction) {
-            Dir.TOP -> {
-                anim.translationY(-distance)
-            }
-            Dir.BOTTOM -> {
-                anim.translationY(distance)
-            }
-            Dir.LEFT -> {
-                anim.translationX(distance)
-            }
-            Dir.RIGHT -> {
-                anim.translationX(-distance)
-            }
-            Dir.TOP_LEFT -> {
-                anim.translationY(-distance)
-                anim.translationX(distance)
-            }
-            Dir.TOP_RIGHT -> {
-                anim.translationY(-distance)
-                anim.translationX(-distance)
-            }
-            Dir.BOTTOM_LEFT -> {
-                anim.translationY(distance)
-                anim.translationX(distance)
-            }
-            Dir.BOTTOM_RIGHT -> {
-                anim.translationY(distance)
-                anim.translationX(-distance)
-            }
-            Dir.DEFAULT -> {
-                anim.translationY(distance)
-            }
+            this.duration = duration
+            startDelay = delay
+            withEndAction { onFinish.invoke(this@moveOut) }
+
+            start()
         }
-
-        anim.duration = duration
-        anim.startDelay = delay
-        anim.start()
     }
 
     fun View.scaleIn(
         initialValue: Float = 0f,
         direction: Dir = Dir.DEFAULT,
         duration: Long = 250,
-        delay: Long = 0
+        delay: Long = 0,
+        onFinish: View.() -> Unit
     ) {
-        this.scaleX = initialValue
-        this.scaleY = initialValue
+        this.apply {
+            scaleX = initialValue
+            scaleY = initialValue
 
-        when (direction) {
-            Dir.TOP -> this.translationY = -this.height.toFloat()
-            Dir.BOTTOM -> this.translationY = this.height.toFloat()
-            Dir.LEFT -> this.translationX = -this.width.toFloat()
-            Dir.RIGHT -> this.translationX = this.width.toFloat()
-            Dir.TOP_LEFT -> {
-                this.translationY = -this.height.toFloat()
-                this.translationX = -this.width.toFloat()
+            val viewWidth = width.toFloat()
+            val viewHeight = height.toFloat()
+
+            when (direction) {
+                Dir.TOP -> translationY = -viewHeight
+                Dir.BOTTOM -> translationY = viewHeight
+                Dir.LEFT -> translationX = -viewWidth
+                Dir.RIGHT -> translationX = viewWidth
+                Dir.TOP_LEFT -> {
+                    translationY = -viewHeight
+                    translationX = -viewWidth
+                }
+                Dir.TOP_RIGHT -> {
+                    translationY = -viewHeight
+                    translationX = viewWidth
+                }
+                Dir.BOTTOM_LEFT -> {
+                    translationY = viewHeight
+                    translationX = -viewWidth
+                }
+                Dir.BOTTOM_RIGHT -> {
+                    translationY = viewHeight
+                    translationX = viewWidth
+                }
+                Dir.DEFAULT -> {
+                }
             }
-            Dir.TOP_RIGHT -> {
-                this.translationY = -this.height.toFloat()
-                this.translationX = this.width.toFloat()
-            }
-            Dir.BOTTOM_LEFT -> {
-                this.translationY = this.height.toFloat()
-                this.translationX = -this.width.toFloat()
-            }
-            Dir.BOTTOM_RIGHT -> {
-                this.translationY = this.height.toFloat()
-                this.translationX = this.width.toFloat()
-            }
-            Dir.DEFAULT -> {
+
+            animate().apply {
+                scaleX(1f)
+                scaleY(1f)
+
+                translationX(0f)
+                translationY(0f)
+
+                this.duration = duration
+                startDelay = delay
+                withEndAction { onFinish.invoke(this@scaleIn) }
+
+                start()
             }
         }
-
-        val anim = this.animate()
-        anim.scaleX(1f)
-        anim.scaleY(1f)
-        anim.translationX(0f)
-        anim.translationY(0f)
-
-        anim.duration = duration
-        anim.startDelay = delay
-        anim.start()
     }
 
     fun View.scaleOut(
@@ -168,175 +164,209 @@ object Anim {
         direction: Dir = Dir.DEFAULT,
         reversed: Boolean = false,
         duration: Long = DURATION,
-        delay: Long = 0
+        delay: Long = 0,
+        onFinish: View.() -> Unit
     ) {
-        this.translationX = 1f
-        this.translationY = 1f
-        val anim = this.animate()
-        anim.scaleX(size)
-        anim.scaleY(size)
+        this.animate().apply {
+            scaleX(size)
+            scaleY(size)
 
-        if (reversed) {
-            when (direction) {
-                Dir.TOP -> anim.translationY(this.height.toFloat())
-                Dir.BOTTOM -> anim.translationY(-this.height.toFloat())
-                Dir.LEFT -> anim.translationX(this.width.toFloat())
-                Dir.RIGHT -> anim.translationX(-this.width.toFloat())
-                Dir.TOP_LEFT -> {
-                    anim.translationY(this.height.toFloat())
-                    anim.translationX(this.width.toFloat())
+            val viewWidth = this@scaleOut.width.toFloat()
+            val viewHeight = this@scaleOut.height.toFloat()
+
+            if (reversed) {
+                when (direction) {
+                    Dir.TOP -> translationY(viewHeight)
+                    Dir.BOTTOM -> translationY(-viewHeight)
+                    Dir.LEFT -> translationX(viewWidth)
+                    Dir.RIGHT -> translationX(-viewWidth)
+                    Dir.TOP_LEFT -> {
+                        translationY(viewHeight)
+                        translationX(viewWidth)
+                    }
+                    Dir.TOP_RIGHT -> {
+                        translationY(viewHeight)
+                        translationX(-viewWidth)
+                    }
+                    Dir.BOTTOM_LEFT -> {
+                        translationY(-viewHeight)
+                        translationX(viewWidth)
+                    }
+                    Dir.BOTTOM_RIGHT -> {
+                        translationY(-viewHeight)
+                        translationX(-viewWidth)
+                    }
+                    Dir.DEFAULT -> {
+                    }
                 }
-                Dir.TOP_RIGHT -> {
-                    anim.translationY(this.height.toFloat())
-                    anim.translationX(-this.width.toFloat())
-                }
-                Dir.BOTTOM_LEFT -> {
-                    anim.translationY(-this.height.toFloat())
-                    anim.translationX(this.width.toFloat())
-                }
-                Dir.BOTTOM_RIGHT -> {
-                    anim.translationY(-this.height.toFloat())
-                    anim.translationX(-this.width.toFloat())
-                }
-                Dir.DEFAULT -> {
+            } else {
+                when (direction) {
+                    Dir.TOP -> translationY(-viewHeight)
+                    Dir.BOTTOM -> translationY(viewHeight)
+                    Dir.LEFT -> translationX(-viewWidth)
+                    Dir.RIGHT -> translationX(viewWidth)
+                    Dir.TOP_LEFT -> {
+                        translationY(-viewHeight)
+                        translationX(-viewWidth)
+                    }
+                    Dir.TOP_RIGHT -> {
+                        translationY(-viewHeight)
+                        translationX(viewWidth)
+                    }
+                    Dir.BOTTOM_LEFT -> {
+                        translationY(viewHeight)
+                        translationX(-viewWidth)
+                    }
+                    Dir.BOTTOM_RIGHT -> {
+                        translationY(viewHeight)
+                        translationX(viewWidth)
+                    }
+                    Dir.DEFAULT -> {
+                    }
                 }
             }
-        } else {
-            when (direction) {
-                Dir.TOP -> anim.translationY(-this.height.toFloat())
-                Dir.BOTTOM -> anim.translationY(this.height.toFloat())
-                Dir.LEFT -> anim.translationX(-this.width.toFloat())
-                Dir.RIGHT -> anim.translationX(this.width.toFloat())
-                Dir.TOP_LEFT -> {
-                    anim.translationY(-this.height.toFloat())
-                    anim.translationX(-this.width.toFloat())
-                }
-                Dir.TOP_RIGHT -> {
-                    anim.translationY(-this.height.toFloat())
-                    anim.translationX(this.width.toFloat())
-                }
-                Dir.BOTTOM_LEFT -> {
-                    anim.translationY(this.height.toFloat())
-                    anim.translationX(-this.width.toFloat())
-                }
-                Dir.BOTTOM_RIGHT -> {
-                    anim.translationY(this.height.toFloat())
-                    anim.translationX(this.width.toFloat())
-                }
-                Dir.DEFAULT -> {
-                }
-            }
+
+            this.duration = duration
+            startDelay = delay
+            withEndAction { onFinish.invoke(this@scaleOut) }
+
+            start()
         }
-
-        anim.duration = duration
-        anim.startDelay = delay
-        anim.start()
     }
 
     fun View.jumpIn(
         initialValue: Float = 0f,
         jumpSize: Float = 1.05f,
         duration: Long = DURATION,
-        delay: Long = 0
+        delay: Long = 0,
+        onFinish: View.() -> Unit
     ) {
         this.scaleX = initialValue
         this.scaleY = initialValue
 
-        val animJumpIn = this.animate()
-        val animJumpBack = this.animate()
+        this.animate().apply {
+            scaleX(jumpSize)
+            scaleY(jumpSize)
 
-        animJumpIn.scaleX(jumpSize)
-        animJumpIn.scaleY(jumpSize)
-        animJumpIn.duration = duration
-        animJumpIn.startDelay = delay
-        animJumpIn.withEndAction {
-            animJumpBack.scaleX(1f)
-            animJumpBack.scaleY(1f)
-            animJumpBack.duration = duration / 2
-            animJumpBack.start()
+            this.duration = duration
+            startDelay = delay
+            withEndAction {
+                this@jumpIn.animate().apply {
+                    scaleX(1f)
+                    scaleY(1f)
+
+                    this.duration = duration / 2
+                    withEndAction { onFinish.invoke(this@jumpIn) }
+
+                    start()
+                }
+            }
+
+            start()
         }
-        animJumpIn.start()
     }
 
     fun View.jumpOut(
         jumpSize: Float = 1.05f,
         duration: Long = DURATION,
-        delay: Long = 0
+        delay: Long = 0,
+        onFinish: View.() -> Unit
     ) {
-        val animeJump = this.animate()
-        val animeJumpOut = this.animate()
+        this.animate().apply {
+            scaleX(jumpSize)
+            scaleY(jumpSize)
 
-        animeJump.scaleX(jumpSize)
-        animeJump.scaleY(jumpSize)
-        animeJump.duration = duration
-        animeJump.startDelay = delay
-        animeJump.withEndAction {
-            animeJumpOut.scaleX(0f)
-            animeJumpOut.scaleY(0f)
-            animeJumpOut.duration = duration / 2
-            animeJumpOut.start()
+            this.duration = duration
+            startDelay = delay
+            withEndAction {
+                this@jumpOut.animate().apply {
+                    scaleX(0f)
+                    scaleY(0f)
+
+                    this.duration = duration / 2
+                    withEndAction { onFinish.invoke(this@jumpOut) }
+
+                    start()
+                }
+            }
+
+            start()
         }
-
-        animeJump.start()
     }
 
     fun View.windowIn(
         initialValue: Float = 0f,
         vertical: Boolean = true,
         duration: Long = 250,
-        delay: Long = 0
+        delay: Long = 0,
+        onFinish: View.() -> Unit
     ) {
-        if (vertical) {
-            this.scaleY = initialValue
-        } else {
-            this.scaleX = initialValue
+        if (vertical) this.scaleY = initialValue else this.scaleX = initialValue
+
+        this.animate().apply {
+            scaleX(1f)
+            scaleY(1f)
+
+            this.duration = duration
+            startDelay = delay
+            withEndAction { onFinish.invoke(this@windowIn) }
+
+            start()
         }
 
-        val anim = this.animate()
-        anim.scaleX(1f)
-        anim.scaleY(1f)
-
-        anim.duration = duration
-        anim.startDelay = delay
-        anim.start()
     }
 
     fun View.windowOut(
         vertical: Boolean = true,
         duration: Long = 250,
-        delay: Long = 0
+        delay: Long = 0,
+        onFinish: View.() -> Unit
     ) {
-        val anim = this.animate()
+        this.animate().apply {
+            if (vertical) scaleX(0f) else scaleY(0f)
 
-        if (vertical) {
-            anim.scaleX(0f)
-        } else {
-            anim.scaleY(0f)
+            this.duration = duration
+            startDelay = delay
+            withEndAction { onFinish.invoke(this@windowOut) }
+
+            start()
         }
-
-        anim.duration = duration
-        anim.startDelay = delay
-        anim.start()
     }
 
 
-    fun View.fadeIn(initialValue: Float = 0f, duration: Long = DURATION, delay: Long = 0) {
+    fun View.fadeIn(
+        initialValue: Float = 0f,
+        duration: Long = DURATION,
+        delay: Long = 0,
+        onFinish: View.() -> Unit
+    ) {
         this.alpha = initialValue
 
-        val anim = this.animate()
-        anim.alpha(1f)
+        this.animate().apply {
+            alpha(1f)
 
-        anim.duration = duration
-        anim.startDelay = delay
-        anim.start()
+            this.duration = duration
+            startDelay = delay
+            withEndAction { onFinish.invoke(this@fadeIn) }
+
+            start()
+        }
     }
 
-    fun View.fadeOut(opacity: Float = 0f, duration: Long = DURATION, delay: Long = 0) {
-        val anim = this.animate()
-        anim.alpha(opacity)
+    fun View.fadeOut(
+        opacity: Float = 0f,
+        duration: Long = DURATION,
+        delay: Long = 0,
+        onFinish: View.() -> Unit
+    ) {
+        this.animate().apply {
+            alpha(opacity)
 
-        anim.duration = duration
-        anim.startDelay = delay
-        anim.start()
+            this.duration = duration
+            startDelay = delay
+            withEndAction { onFinish.invoke(this@fadeOut) }
+
+            start()
+        }
     }
 }
