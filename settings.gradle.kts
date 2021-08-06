@@ -1,2 +1,2 @@
 rootProject.name = "ktAnimes"
-include ':ktAnims'
+include(":ktAnims")

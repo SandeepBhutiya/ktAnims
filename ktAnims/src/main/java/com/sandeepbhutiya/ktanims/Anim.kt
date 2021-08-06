@@ -3,7 +3,6 @@ package com.sandeepbhutiya.ktanims
 import android.view.View
 
 @Suppress("unused")
-@SuppressWarnings("unused")
 object Anim {
     private const val DURATION = 250L
     private const val DISTANCE = 150f
@@ -20,14 +19,14 @@ object Anim {
         DEFAULT
     }
 
-    fun View.moveIn(
-        direction: Dir,
+    fun <T : View> T.moveIn(
+        direction: Dir = Dir.TOP,
         distance: Float = DISTANCE,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: (View.() -> Unit)? = null
+        onFinish: (T.() -> Unit)? = null
     ) {
-        this.animate().apply {
+        animate().run {
             when (direction) {
                 Dir.TOP -> this@moveIn.translationY = -distance
                 Dir.BOTTOM -> this@moveIn.translationY = distance
@@ -49,7 +48,9 @@ object Anim {
                     this@moveIn.translationY = distance
                     this@moveIn.translationX = -distance
                 }
-                Dir.DEFAULT -> this@moveIn.translationY = -distance
+                Dir.DEFAULT -> {
+
+                }
             }
 
             translationX(0f)
@@ -63,15 +64,14 @@ object Anim {
         }
     }
 
-
-    fun View.moveOut(
-        direction: Dir,
+    fun <T : View> T.moveOut(
+        direction: Dir = Dir.TOP,
         distance: Float = DISTANCE,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: (View.() -> Unit)? = null
+        onFinish: (T.() -> Unit)? = null
     ) {
-        this.animate().apply {
+        animate().run {
             when (direction) {
                 Dir.TOP -> translationY(-distance)
                 Dir.BOTTOM -> translationY(distance)
@@ -93,7 +93,9 @@ object Anim {
                     translationY(distance)
                     translationX(-distance)
                 }
-                Dir.DEFAULT -> translationY(distance)
+                Dir.DEFAULT -> {
+
+                }
             }
 
             this.duration = duration
@@ -104,14 +106,14 @@ object Anim {
         }
     }
 
-    fun View.scaleIn(
+    fun <T : View> T.scaleIn(
         initialValue: Float = 0f,
         direction: Dir = Dir.DEFAULT,
         duration: Long = 250,
         delay: Long = 0,
-        onFinish: (View.() -> Unit)? = null
+        onFinish: (T.() -> Unit)? = null
     ) {
-        this.apply {
+        run {
             scaleX = initialValue
             scaleY = initialValue
 
@@ -143,7 +145,7 @@ object Anim {
                 }
             }
 
-            animate().apply {
+            animate().run {
                 scaleX(1f)
                 scaleY(1f)
 
@@ -158,15 +160,15 @@ object Anim {
         }
     }
 
-    fun View.scaleOut(
+    fun <T : View> T.scaleOut(
         size: Float = 0f,
         direction: Dir = Dir.DEFAULT,
         reversed: Boolean = false,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: (View.() -> Unit)? = null
+        onFinish: (T.() -> Unit)? = null
     ) {
-        this.animate().apply {
+        animate().run {
             scaleX(size)
             scaleY(size)
 
@@ -233,17 +235,17 @@ object Anim {
         }
     }
 
-    fun View.jumpIn(
+    fun <T : View> T.jumpIn(
         initialValue: Float = 0f,
         jumpSize: Float = 1.05f,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: (View.() -> Unit)? = null
+        onFinish: (T.() -> Unit)? = null
     ) {
-        this.scaleX = initialValue
-        this.scaleY = initialValue
+        scaleX = initialValue
+        scaleY = initialValue
 
-        this.animate().apply {
+        animate().run {
             scaleX(jumpSize)
             scaleY(jumpSize)
 
@@ -265,13 +267,13 @@ object Anim {
         }
     }
 
-    fun View.jumpOut(
+    fun <T : View> T.jumpOut(
         jumpSize: Float = 1.05f,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: (View.() -> Unit)? = null
+        onFinish: (T.() -> Unit)? = null
     ) {
-        this.animate().apply {
+        animate().run {
             scaleX(jumpSize)
             scaleY(jumpSize)
 
@@ -293,16 +295,16 @@ object Anim {
         }
     }
 
-    fun View.windowIn(
+    fun <T : View> T.windowIn(
         initialValue: Float = 0f,
         vertical: Boolean = true,
         duration: Long = 250,
         delay: Long = 0,
-        onFinish: (View.() -> Unit)? = null
+        onFinish: (T.() -> Unit)? = null
     ) {
-        if (vertical) this.scaleY = initialValue else this.scaleX = initialValue
+        if (vertical) scaleY = initialValue else scaleX = initialValue
 
-        this.animate().apply {
+        animate().run {
             scaleX(1f)
             scaleY(1f)
 
@@ -315,13 +317,13 @@ object Anim {
 
     }
 
-    fun View.windowOut(
+    fun <T : View> T.windowOut(
         vertical: Boolean = true,
         duration: Long = 250,
         delay: Long = 0,
-        onFinish: (View.() -> Unit)? = null
+        onFinish: (T.() -> Unit)? = null
     ) {
-        this.animate().apply {
+        animate().run {
             if (vertical) scaleX(0f) else scaleY(0f)
 
             this.duration = duration
@@ -333,15 +335,15 @@ object Anim {
     }
 
 
-    fun View.fadeIn(
+    fun <T : View> T.fadeIn(
         initialValue: Float = 0f,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: (View.() -> Unit)? = null
+        onFinish: (T.() -> Unit)? = null
     ) {
-        this.alpha = initialValue
+        alpha = initialValue
 
-        this.animate().apply {
+        animate().run {
             alpha(1f)
 
             this.duration = duration
@@ -352,13 +354,13 @@ object Anim {
         }
     }
 
-    fun View.fadeOut(
+    fun <T : View> T.fadeOut(
         opacity: Float = 0f,
         duration: Long = DURATION,
         delay: Long = 0,
-        onFinish: (View.() -> Unit)? = null
+        onFinish: (T.() -> Unit)? = null
     ) {
-        this.animate().apply {
+        animate().run {
             alpha(opacity)
 
             this.duration = duration
