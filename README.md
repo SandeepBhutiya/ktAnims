@@ -68,5 +68,3 @@ View.apply {
 * .fadeIn()
 * .fadeOut()
 
-#### More animations are coming...
-
